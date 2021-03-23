@@ -84,19 +84,19 @@ public class MainActivity extends AppCompatActivity {
             opica.setVisibility(View.GONE);
             budova.setVisibility(View.GONE);
 
-            HscoreView.setText("High score : "+hScore);
+           // HscoreView.setText("High score : "+hScore);
+            HscoreView.setText("High score : "+opica.getY());
 
 
 
-
-            budovaX = 0;
+            budovaX = opica.getX();
             budova.setX(budovaX);
-            budovaY =displayMetrics.heightPixels;
+            budovaY =(int)((displayMetrics.heightPixels/2)+(displayMetrics.heightPixels/8));
             budova.setY(budovaY);
 
         }
         public void start(View view){
-            opica.setImageResource(R.drawable.neskace);
+          //  opica.setImageResource(R.drawable.neskace);
             score = 0;
             ScoreView.setText(score+" : Score");
             skacem=false;
@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             posunAuto();
+                            HscoreView.setText("High score : "+opica.getY());
                             if(koniec()){
                                 if (score>hScore)
                                     hScore=score;
@@ -124,14 +125,14 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                 }
-            }, 0, 4);
+            }, 0, 10);
             if (!prehra){
                 pozadie.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
                         if (!skacem){
-                            opica.setImageResource(R.drawable.skace);
+                         //   opica.setImageResource(R.drawable.skace);
                             skacem=true;
                             idemhore=true;
 
@@ -176,8 +177,8 @@ public class MainActivity extends AppCompatActivity {
                 budovaX =displayMetrics.widthPixels;
                 budova.setX(budovaX);
                 score++;
-                mediaPlayer = MediaPlayer.create(this ,R.raw.coin_effect);
-                mediaPlayer.start();
+           //     mediaPlayer = MediaPlayer.create(this ,R.raw.coin_effect);
+ //               mediaPlayer.start();
                 ScoreView.setText(score+" : Score");
             }
 
@@ -191,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
             if (idemhore){
                 opicaY -=4;
                 opica.setY(opicaY);
-                if (opicaY < 300){
+                if (opicaY < 50){
                     idemhore=false;
                 }
             }
@@ -200,17 +201,17 @@ public class MainActivity extends AppCompatActivity {
         public void spadni(){
             opicaY +=2;
             opica.setY(opicaY);
-            if(opicaY > (budovaY+budova.getHeight())) {
+            if(opicaY >= budovaY-opica.getHeight()) {
                 timerO.cancel();
-                opica.setImageResource(R.drawable.neskace);
+           //     opica.setImageResource(R.drawable.neskace);
                 skacem=false;
-                opica.setY(budovaY);
+               // opica.setY(o);
             }
         }
         public boolean koniec(){
             if (opica.getY()>displayMetrics.heightPixels ){
-                mediaPlayer = MediaPlayer.create(this ,R.raw.splat_effect);
-                mediaPlayer.start();
+           //     mediaPlayer = MediaPlayer.create(this ,R.raw.splat_effect);
+         //       mediaPlayer.start();
                 return true;
             }
             return false;
@@ -230,5 +231,3 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-}
