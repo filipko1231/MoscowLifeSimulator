@@ -114,6 +114,9 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             posunAuto();
+                            if (!idemhore && opica.getY()!=budova.getY()                               ((opica.getX()<budovaX || opica.getX()>budovaX+budova.getWidth() )&&)) {
+                                spadni();
+                            }
                             HscoreView.setText("High score : "+opica.getY());
                             if(koniec()){
                                 if (score>hScore)
@@ -158,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
                                         public void run() {
                                             if (idemhore)
                                                 vyskoc();
-                                            else spadni();
+
                                         }
                                     });
 
@@ -184,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
 
             budovaX -= 2;
             budova.setX(budovaX);
+
         }
         //450
         public void vyskoc(){
@@ -194,6 +198,8 @@ public class MainActivity extends AppCompatActivity {
                 opica.setY(opicaY);
                 if (opicaY < 50){
                     idemhore=false;
+                    timerO.cancel();
+                    skacem=false;
                 }
             }
 
@@ -201,12 +207,12 @@ public class MainActivity extends AppCompatActivity {
         public void spadni(){
             opicaY +=2;
             opica.setY(opicaY);
-            if(opicaY >= budovaY-opica.getHeight()) {
-                timerO.cancel();
+
+
            //     opica.setImageResource(R.drawable.neskace);
-                skacem=false;
+
                // opica.setY(o);
-            }
+
         }
         public boolean koniec(){
             if (opica.getY()>displayMetrics.heightPixels ){
