@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            budovaX = opica.getX();
+            budovaX = opica.getX()+50;
             budova.setX(budovaX);
             budovaY =(int)((displayMetrics.heightPixels/2)+(displayMetrics.heightPixels/8));
             budova.setY(budovaY);
@@ -134,9 +134,9 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onClick(View v) {
-                        if (!skacem){
+                        if (opica.getX()+opica.getWidth()>=budovaX && opica.getX()<=budovaX+budova.getWidth() && opica.getY()-opica.getHeight()==budova.getY()-budova.getHeight()){
                          //   opica.setImageResource(R.drawable.skace);
-                            skacem=true;
+
                             idemhore=true;
 
                         /*final Handler handl = new Handler();
