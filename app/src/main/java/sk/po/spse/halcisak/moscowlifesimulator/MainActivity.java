@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             posunAuto();
-                            if (!idemhore && opica.getY()!=budova.getY()                               ((opica.getX()<budovaX || opica.getX()>budovaX+budova.getWidth() )&&)) {
+                            if (!idemhore &&  !(opica.getX()+opica.getWidth()>=budovaX && opica.getX()<=budovaX+budova.getWidth() && opica.getY()-opica.getHeight()==budova.getY()-budova.getHeight())) {
                                 spadni();
                             }
                             HscoreView.setText("High score : "+opica.getY());
