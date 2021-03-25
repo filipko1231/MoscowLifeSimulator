@@ -67,13 +67,16 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/spiderman"
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/opica"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="45dp"
-            app:srcCompat="@drawable/monkey" />
+            android:src="@drawable/running_monkey"
+            />
+
+
+
 
         <ImageView
             android:id="@+id/auto"

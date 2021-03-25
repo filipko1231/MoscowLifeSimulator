@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "sk.po.spse.halcisak.moscowlifesimulator"
-        minSdkVersion 14
+        minSdkVersion 17
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -29,5 +29,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
 }

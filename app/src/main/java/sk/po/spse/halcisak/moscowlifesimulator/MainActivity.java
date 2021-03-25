@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
             getSupportActionBar().hide();
             pozadie = findViewById(R.id.pozadie);
-            opica = findViewById(R.id.spiderman);
+            opica = findViewById(R.id.opica);
             budova = findViewById(R.id.auto);
             budova2 = findViewById(R.id.auto2);
             HscoreView = findViewById(R.id.highScoreView);
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             budovaY =(int)((displayMetrics.heightPixels/2)+(displayMetrics.heightPixels/8));
             budova.setY(budovaY);
             budova2x=budovaX+1200;
-            budova2y=budovaY;
+            budova2y=budovaY+200;
             budova2.setY(budova2y);
             budova2.setX(budova2x);
 
@@ -121,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             posunAuto();
                             posunAuto2();
+                           /* if (!idemhore && !(opica.getY()-opica.getHeight()==200))
+                            {
+                                s*/
                             if (!idemhore &&  !(opica.getX()+opica.getWidth()>=budovaX && opica.getX()<=budovaX+budova.getWidth() && opica.getY()-opica.getHeight()==budova.getY()-budova.getHeight()) && !(opica.getX()+opica.getWidth()>=budova2x && opica.getX()<=budova2x+budova.getWidth() && opica.getY()-opica.getHeight()==budova2.getY()-budova2.getHeight())) {
                                 spadni();
                             }
@@ -212,9 +215,11 @@ public class MainActivity extends AppCompatActivity {
     }
         //450
         public void vyskoc(){
+            //opica.setImageResource(R.drawable.jumping_monkey_v1);
             //mediaPlayer = MediaPlayer.create(this ,R.raw.jump_effect);
             //mediaPlayer.start();
             if (idemhore){
+               // opica.setImageResource(R.drawable.jumping_monkey_v1);
                 opicaY -=4;
                 opica.setY(opicaY);
                 if (opicaY < 100){
@@ -222,13 +227,13 @@ public class MainActivity extends AppCompatActivity {
                     timerO.cancel();
 
                 }
-            }
+            }//else opica.setImageResource(R.drawable.monkey);
 
         }
         public void spadni(){
             opicaY +=1;
             opica.setY(opicaY);
-
+            //opica.setImageResource(R.drawable.jumping_monkey_v1);
 
            //     opica.setImageResource(R.drawable.neskace);
 
