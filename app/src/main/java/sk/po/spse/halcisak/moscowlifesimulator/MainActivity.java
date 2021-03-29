@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         private int score;
 
         private boolean prehra;
+        Random rn=new Random();
+        float vyskaSkoku=500;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             budova.setVisibility(View.GONE);
             budova2.setVisibility(View.GONE);
            // HscoreView.setText("High score : "+hScore);
-            HscoreView.setText("High score : "+opica.getY());
+            HscoreView.setText("High score : "+hScore);
 
 
 
@@ -127,7 +130,8 @@ public class MainActivity extends AppCompatActivity {
                             if (!idemhore &&  !(opica.getX()+opica.getWidth()>=budovaX && opica.getX()<=budovaX+budova.getWidth() && opica.getY()-opica.getHeight()==budova.getY()-budova.getHeight()) && !(opica.getX()+opica.getWidth()>=budova2x && opica.getX()<=budova2x+budova.getWidth() && opica.getY()-opica.getHeight()==budova2.getY()-budova2.getHeight())) {
                                 spadni();
                             }
-                            HscoreView.setText("High score : "+opica.getY());
+
+                            HscoreView.setText("High score : "+hScore);
                             if(koniec()){
                                 if (score>hScore)
                                     hScore=score;
@@ -139,13 +143,14 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
             }, 0, 1);
+
             if (!prehra){
                 pozadie.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
                         if ((opica.getX()+opica.getWidth()>=budovaX && opica.getX()<=budovaX+budova.getWidth() && opica.getY()-opica.getHeight()==budova.getY()-budova.getHeight())||(opica.getX()+opica.getWidth()>=budova2x && opica.getX()<=budova2x+budova.getWidth() && opica.getY()-opica.getHeight()==budova2.getY()-budova2.getHeight())){
-                         //   opica.setImageResource(R.drawable.skace);
+                          //  opica.setImageResource(R.drawable.jumping_monkey_v1);
 
                             idemhore=true;
 
@@ -193,6 +198,8 @@ public class MainActivity extends AppCompatActivity {
             //     mediaPlayer = MediaPlayer.create(this ,R.raw.coin_effect);
             //               mediaPlayer.start();
             ScoreView.setText(score+" : Score");
+            /*budovaY =(int)((displayMetrics.heightPixels)-rn.nextInt(budova.getHeight()+50)-50);
+            budova.setY(budovaY);*/
         }
 
         budovaX -= 2;
@@ -207,6 +214,9 @@ public class MainActivity extends AppCompatActivity {
             //     mediaPlayer = MediaPlayer.create(this ,R.raw.coin_effect);
             //               mediaPlayer.start();
             ScoreView.setText(score+" : Score");
+            /*budova2y =(int)((displayMetrics.heightPixels)-rn.nextInt(budova2.getHeight()+50)-50);
+            budova2.setY(budova2y);*/
+
         }
 
         budova2x -= 2;
@@ -221,11 +231,12 @@ public class MainActivity extends AppCompatActivity {
             if (idemhore){
                // opica.setImageResource(R.drawable.jumping_monkey_v1);
                 opicaY -=4;
+                vyskaSkoku-=4;
                 opica.setY(opicaY);
-                if (opicaY < 100){
+                if (vyskaSkoku<=0){
                     idemhore=false;
                     timerO.cancel();
-
+                    vyskaSkoku=500;
                 }
             }//else opica.setImageResource(R.drawable.monkey);
 
