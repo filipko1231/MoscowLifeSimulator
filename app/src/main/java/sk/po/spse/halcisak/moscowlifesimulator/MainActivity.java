@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         private TextView HscoreView;
         private TextView ScoreView;
         private TextView play;
+        private float rychlost = 2;
 
         private float budovaX, budovaY, opicaY, budova2x, budova2y;
         private boolean start=true;
@@ -109,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
           //  opica.setImageResource(R.drawable.neskace);
             score = 0;
             ScoreView.setText(score+" : Score");
+            rychlost=2;
 
             opicaY = 0;
             opica.setY(opicaY);
@@ -146,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
                                 spadni();
                             }
 
+
                             HscoreView.setText("High score : "+hScore);
                             if(koniec()){
                                 if (score>hScore)
@@ -164,45 +167,60 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onClick(View v) {
-                        if ((opica.getX()+opica.getWidth()>=budovaX && opica.getX()<=budovaX+budova.getWidth() && opica.getY()-opica.getHeight()==budova.getY()-budova.getHeight())||(opica.getX()+opica.getWidth()>=budova2x && opica.getX()<=budova2x+budova.getWidth() && opica.getY()-opica.getHeight()==budova2.getY()-budova2.getHeight())){
-                            opica.setImageResource(R.drawable.jumping_monkey);
-                            bezim=false;
-                            idemhore=true;
+                        if (!idemhore) {
+                            if ((opica.getX() + opica.getWidth() >= budovaX && opica.getX() <= budovaX + budova.getWidth() && opica.getY() - opica.getHeight() == budova.getY() - budova.getHeight()) || (opica.getX() + opica.getWidth() >= budova2x && opica.getX() <= budova2x + budova.getWidth() && opica.getY() - opica.getHeight() == budova2.getY() - budova2.getHeight())) {
+                                opica.setImageResource(R.drawable.jumping_monkey);
+                                bezim = false;
+                                idemhore = true;
 
-                        /*final Handler handl = new Handler();
-                        Runnable runnable = new Runnable() {
+                            /*final Handler handl = new Handler();
+                            Runnable runnable = new Runnable() {
 
-                            public void run() {
-                                if (idemhore)
-                                    vyskoc();
-
-                                else spadni();
-                                handl.postDelayed(this, 10); // for interval...
-                            }
-                        };
-                        handl.postDelayed(runnable, 1);*/
-
-                            timerO = new Timer();
-                            timerO.schedule(new TimerTask() {
-                                @Override
                                 public void run() {
-                                    handler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            if (idemhore)
-                                                vyskoc();
+                                    if (idemhore)
+                                        vyskoc();
 
-                                        }
-                                    });
-
+                                    else spadni();
+                                    handl.postDelayed(this, 10); // for interval...
                                 }
+                            };
+                            handl.postDelayed(runnable, 1);*/
 
-                            }, 0, 7);
+                                timerO = new Timer();
+                                timerO.schedule(new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        handler.post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                if (idemhore)
+                                                    vyskoc();
+
+                                            }
+                                        });
+
+                                    }
+
+                                }, 0, 7);
+                            }
+                        }
+                        else {
+                            rychlost=10;
+                            try
+                            {
+                                Thread.sleep(1000);
+                            }
+                            catch(InterruptedException ex)
+                            {
+                                Thread.currentThread().interrupt();
+                            }
+                            rychlost=2;
                         }
                     }
                 });
 
             }
+
 
         }
 
@@ -218,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
             budova.setY(budovaY);*/
         }
 
-        budovaX -= 2;
+        budovaX -= rychlost;
         budova.setX(budovaX);
 
     }
@@ -235,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        budova2x -= 2;
+        budova2x -= rychlost;
         budova2.setX(budova2x);
 
     }
