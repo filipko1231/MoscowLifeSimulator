@@ -41,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
         private TextView play;
 
         private float budovaX, budovaY, opicaY, budova2x, budova2y;
+        private boolean start=true;
         private boolean idemhore;
+        private boolean bezim;
         private int perioda = 10;
 
         private int hScore;
@@ -127,7 +129,20 @@ public class MainActivity extends AppCompatActivity {
                            /* if (!idemhore && !(opica.getY()-opica.getHeight()==200))
                             {
                                 s*/
-                            if (!idemhore &&  !(opica.getX()+opica.getWidth()>=budovaX && opica.getX()<=budovaX+budova.getWidth() && opica.getY()-opica.getHeight()==budova.getY()-budova.getHeight()) && !(opica.getX()+opica.getWidth()>=budova2x && opica.getX()<=budova2x+budova.getWidth() && opica.getY()-opica.getHeight()==budova2.getY()-budova2.getHeight())) {
+
+                            /*if (!idemhore &&  !(opica.getX()+opica.getWidth()>=budovaX && opica.getX()<=budovaX+budova.getWidth() && opica.getY()-opica.getHeight()==budova.getY()-budova.getHeight()) && !(opica.getX()+opica.getWidth()>=budova2x && opica.getX()<=budova2x+budova.getWidth() && opica.getY()-opica.getHeight()==budova2.getY()-budova2.getHeight())) {
+                                spadni();
+                            }
+                            else if (!bezim && idemhore &&  (opica.getX()+opica.getWidth()>=budovaX && opica.getX()<=budovaX+budova.getWidth() && opica.getY()-opica.getHeight()==budova.getY()-budova.getHeight()) && !(opica.getX()+opica.getWidth()>=budova2x && opica.getX()<=budova2x+budova.getWidth() && opica.getY()-opica.getHeight()==budova2.getY()-budova2.getHeight())){
+                                opica.setImageResource(R.drawable.running_monkey);
+                                bezim=true;
+                            }*/
+
+                            if (!bezim &&  (opica.getX()+opica.getWidth()>=budovaX && opica.getX()<=budovaX+budova.getWidth() && opica.getY()-opica.getHeight()==budova.getY()-budova.getHeight()) && !(opica.getX()+opica.getWidth()>=budova2x && opica.getX()<=budova2x+budova.getWidth() && opica.getY()-opica.getHeight()==budova2.getY()-budova2.getHeight())){
+                                opica.setImageResource(R.drawable.running_monkey);
+                                bezim=true;
+                            }
+                            else if (!idemhore &&  !(opica.getX()+opica.getWidth()>=budovaX && opica.getX()<=budovaX+budova.getWidth() && opica.getY()-opica.getHeight()==budova.getY()-budova.getHeight()) && !(opica.getX()+opica.getWidth()>=budova2x && opica.getX()<=budova2x+budova.getWidth() && opica.getY()-opica.getHeight()==budova2.getY()-budova2.getHeight())) {
                                 spadni();
                             }
 
@@ -150,8 +165,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if ((opica.getX()+opica.getWidth()>=budovaX && opica.getX()<=budovaX+budova.getWidth() && opica.getY()-opica.getHeight()==budova.getY()-budova.getHeight())||(opica.getX()+opica.getWidth()>=budova2x && opica.getX()<=budova2x+budova.getWidth() && opica.getY()-opica.getHeight()==budova2.getY()-budova2.getHeight())){
-                          //  opica.setImageResource(R.drawable.jumping_monkey_v1);
-
+                            opica.setImageResource(R.drawable.jumping_monkey);
+                            bezim=false;
                             idemhore=true;
 
                         /*final Handler handl = new Handler();
@@ -186,6 +201,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+
             }
 
         }
@@ -229,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
             //mediaPlayer = MediaPlayer.create(this ,R.raw.jump_effect);
             //mediaPlayer.start();
             if (idemhore){
-               // opica.setImageResource(R.drawable.jumping_monkey_v1);
+                //opica.setImageResource(R.drawable.jumping_monkey);
                 opicaY -=4;
                 vyskaSkoku-=4;
                 opica.setY(opicaY);
@@ -237,6 +253,7 @@ public class MainActivity extends AppCompatActivity {
                     idemhore=false;
                     timerO.cancel();
                     vyskaSkoku=500;
+                    opica.setImageResource(R.drawable.falling_monkey_v1);
                 }
             }//else opica.setImageResource(R.drawable.monkey);
 
