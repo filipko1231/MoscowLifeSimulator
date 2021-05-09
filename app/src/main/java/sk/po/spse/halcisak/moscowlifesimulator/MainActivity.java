@@ -147,13 +147,21 @@ public class MainActivity extends AppCompatActivity {
                             }
 
 
-                            if (dash){
+                            if ((opica.getX()+opica.getWidth()>=budovaX && opica.getX()+opica.getWidth()-budova.getWidth()<=budovaX && opica.getY()-opica.getHeight()>budovaY-budova.getHeight())) {
+                                rychlost=0;
+                            }
+                            else if ((opica.getX()+opica.getWidth()>=budova2x && opica.getX()+opica.getWidth()-budova2.getWidth()<=budova2x && opica.getY()-opica.getHeight()>budova2y-budova2.getHeight())){
+                                rychlost=0;
+                            }
+                            else if (dash){
                                 rychlost=10;
                                 dashcount--;
                                 if (dashcount<=0){
                                     rychlost=2;
                                 }
                             }
+
+
 
 
 
@@ -177,10 +185,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         if (bezim) {
                             opica.setImageResource(R.drawable.jumping_monkey);
-                            if ((opica.getX() + opica.getWidth() >= budovaX && opica.getX() <= budovaX + budova.getWidth() && opica.getY() - opica.getHeight() == budova.getY() - budova.getHeight()) || (opica.getX() + opica.getWidth() >= budova2x && opica.getX() <= budova2x + budova.getWidth() && opica.getY() - opica.getHeight() == budova2.getY() - budova2.getHeight())) {
+                          //  if ((opica.getX() + opica.getWidth() >= budovaX && opica.getX() <= budovaX + budova.getWidth() && opica.getY() - opica.getHeight() == budova.getY() - budova.getHeight()) || (opica.getX() + opica.getWidth() >= budova2x && opica.getX() <= budova2x + budova.getWidth() && opica.getY() - opica.getHeight() == budova2.getY() - budova2.getHeight())) {
                                 bezim = false;
                                 idemhore = true;
-                                dash=false;
                                 timerO = new Timer();
                                 timerO.schedule(new TimerTask() {
                                     @Override
@@ -197,11 +204,12 @@ public class MainActivity extends AppCompatActivity {
                                     }
 
                                 }, 0, 7);
-                            }
+                          //  }
                         }
-                        else if(!dash) {
+                        else if(!dash && !bezim) {
                             dash=true;
                             dashcount=100;
+
                         }
 
                     }
