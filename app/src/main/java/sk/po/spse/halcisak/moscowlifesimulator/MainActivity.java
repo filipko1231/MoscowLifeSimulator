@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         private TextView ScoreView;
         private TextView play;
         private float rychlost = 2;
+        private int dashcount=0;
 
         private float budovaX, budovaY, opicaY, budova2x, budova2y;
         private boolean start=true;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         private Timestamp timestampN;
         private Timestamp timestamp;
         private boolean dash;
+        private double dashtime;
 
         private int hScore;
         private int score;
@@ -96,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
             opica.setVisibility(View.GONE);
             budova.setVisibility(View.GONE);
             budova2.setVisibility(View.GONE);
-           // HscoreView.setText("High score : "+hScore);
             HscoreView.setText("High score : "+hScore);
 
 
@@ -112,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
         public void start(View view){
-          //  opica.setImageResource(R.drawable.neskace);
             score = 0;
             ScoreView.setText(score+" : Score");
             rychlost=2;
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             posunAuto();
                             posunAuto2();
-                            timestampN = new Timestamp(System.currentTimeMillis());
+
                             if (!bezim &&  (opica.getX()+opica.getWidth()>=budovaX && opica.getX()<=budovaX+budova.getWidth() && opica.getY()-opica.getHeight()==budova.getY()-budova.getHeight()) && !(opica.getX()+opica.getWidth()>=budova2x && opica.getX()<=budova2x+budova.getWidth() && opica.getY()-opica.getHeight()==budova2.getY()-budova2.getHeight())){
                                 opica.setImageResource(R.drawable.running_monkey);
                                 bezim=true;
@@ -143,18 +143,18 @@ public class MainActivity extends AppCompatActivity {
                             }
                             else if (!idemhore &&  !(opica.getX()+opica.getWidth()>=budovaX && opica.getX()<=budovaX+budova.getWidth() && opica.getY()-opica.getHeight()==budova.getY()-budova.getHeight()) && !(opica.getX()+opica.getWidth()>=budova2x && opica.getX()<=budova2x+budova.getWidth() && opica.getY()-opica.getHeight()==budova2.getY()-budova2.getHeight())) {
                                 spadni();
+                                bezim=false;
                             }
 
 
-                            if ((opica.getX()+opica.getWidth()>=budovaX && opica.getY()-opica.getHeight()>budovaY)) {
-                                rychlost=0;
+                            if (dash){
+                                rychlost=10;
+                                dashcount--;
+                                if (dashcount<=0){
+                                    rychlost=2;
+                                }
                             }
-                            else if ((opica.getX()+opica.getWidth()>=budova2x && opica.getY()-opica.getHeight()>budova2y)){
-                                rychlost=0;
-                            }
-                            else if (!bezim && dash && timestampN.getSeconds()-timestamp.getSeconds()>=1){
-                                rychlost=2;
-                            }
+
 
 
                             HscoreView.setText("High score : "+hScore);
@@ -176,24 +176,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (bezim) {
+                            opica.setImageResource(R.drawable.jumping_monkey);
                             if ((opica.getX() + opica.getWidth() >= budovaX && opica.getX() <= budovaX + budova.getWidth() && opica.getY() - opica.getHeight() == budova.getY() - budova.getHeight()) || (opica.getX() + opica.getWidth() >= budova2x && opica.getX() <= budova2x + budova.getWidth() && opica.getY() - opica.getHeight() == budova2.getY() - budova2.getHeight())) {
-                                opica.setImageResource(R.drawable.jumping_monkey);
                                 bezim = false;
                                 idemhore = true;
-
-                            /*final Handler handl = new Handler();
-                            Runnable runnable = new Runnable() {
-
-                                public void run() {
-                                    if (idemhore)
-                                        vyskoc();
-
-                                    else spadni();
-                                    handl.postDelayed(this, 10); // for interval...
-                                }
-                            };
-                            handl.postDelayed(runnable, 1);*/
-
+                                dash=false;
                                 timerO = new Timer();
                                 timerO.schedule(new TimerTask() {
                                     @Override
@@ -213,10 +200,10 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                         else if(!dash) {
-                            rychlost=10;
-                            timestamp = new Timestamp(System.currentTimeMillis());
                             dash=true;
+                            dashcount=100;
                         }
+
                     }
                 });
 
@@ -230,11 +217,8 @@ public class MainActivity extends AppCompatActivity {
             budovaX =displayMetrics.widthPixels;
             budova.setX(budovaX);
             score++;
-            //     mediaPlayer = MediaPlayer.create(this ,R.raw.coin_effect);
-            //               mediaPlayer.start();
             ScoreView.setText(score+" : Score");
-            /*budovaY =(int)((displayMetrics.heightPixels)-rn.nextInt(budova.getHeight()+50)-50);
-            budova.setY(budovaY);*/
+
         }
 
         budovaX -= rychlost;
@@ -246,12 +230,7 @@ public class MainActivity extends AppCompatActivity {
             budova2x =displayMetrics.widthPixels;
             budova2.setX(budova2x);
             score++;
-            //     mediaPlayer = MediaPlayer.create(this ,R.raw.coin_effect);
-            //               mediaPlayer.start();
             ScoreView.setText(score+" : Score");
-            /*budova2y =(int)((displayMetrics.heightPixels)-rn.nextInt(budova2.getHeight()+50)-50);
-            budova2.setY(budova2y);*/
-
         }
 
         budova2x -= rychlost;
@@ -260,11 +239,7 @@ public class MainActivity extends AppCompatActivity {
     }
         //450
         public void vyskoc(){
-            //opica.setImageResource(R.drawable.jumping_monkey_v1);
-            //mediaPlayer = MediaPlayer.create(this ,R.raw.jump_effect);
-            //mediaPlayer.start();
             if (idemhore){
-                //opica.setImageResource(R.drawable.jumping_monkey);
                 opicaY -=4;
                 vyskaSkoku-=4;
                 opica.setY(opicaY);
@@ -274,23 +249,16 @@ public class MainActivity extends AppCompatActivity {
                     vyskaSkoku=500;
                     opica.setImageResource(R.drawable.falling_monkey_v1);
                 }
-            }//else opica.setImageResource(R.drawable.monkey);
+            }
 
         }
         public void spadni(){
             opicaY +=1;
             opica.setY(opicaY);
-            //opica.setImageResource(R.drawable.jumping_monkey_v1);
-
-           //     opica.setImageResource(R.drawable.neskace);
-
-               // opica.setY(o);
 
         }
         public boolean koniec(){
             if (opica.getY()>displayMetrics.heightPixels ){
-           //     mediaPlayer = MediaPlayer.create(this ,R.raw.splat_effect);
-         //       mediaPlayer.start();
                 return true;
             }
             return false;
