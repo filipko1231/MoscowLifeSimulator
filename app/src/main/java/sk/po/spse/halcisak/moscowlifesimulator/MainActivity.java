@@ -49,8 +49,7 @@ public class MainActivity extends AppCompatActivity {
         private boolean idemhore;
         private boolean bezim;
         private int perioda = 10;
-        private Timestamp timestampN;
-        private Timestamp timestamp;
+
         private boolean dash;
         private double dashtime;
 
@@ -137,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                             posunAuto2();
                             dashcount--;
 
-                            if (!bezim &&  (opica.getX()+opica.getWidth()>=budovaX && opica.getX()<=budovaX+budova.getWidth() && opica.getY()-opica.getHeight()==budova.getY()-budova.getHeight()) && !(opica.getX()+opica.getWidth()>=budova2x && opica.getX()<=budova2x+budova.getWidth() && opica.getY()-opica.getHeight()==budova2.getY()-budova2.getHeight())){
+                            if ((opica.getX() + opica.getWidth() >= budovaX && opica.getX() <= budovaX + budova.getWidth() && opica.getY() - opica.getHeight() >= budova.getY() - budova.getHeight()) || (opica.getX() + opica.getWidth() >= budova2x && opica.getX() <= budova2x + budova2.getWidth() && opica.getY() - opica.getHeight() >= budova2.getY() - budova2.getHeight())) {
                                 opica.setImageResource(R.drawable.running_monkey);
                                 bezim=true;
                                 dash=false;
@@ -148,10 +147,10 @@ public class MainActivity extends AppCompatActivity {
                             }
 
 
-                            if ((opica.getX()+opica.getWidth()>=budovaX && opica.getX()+opica.getWidth()-budova.getWidth()<=budovaX && opica.getY()-opica.getHeight()>budovaY-budova.getHeight())) {
+                            if ((opica.getX()+opica.getWidth()>=budovaX-5 && opica.getX()+opica.getWidth()-budova.getWidth()<=budovaX && opica.getY()-opica.getHeight()>budovaY-budova.getHeight())) {
                                 rychlost=0;
                             }
-                            else if ((opica.getX()+opica.getWidth()>=budova2x && opica.getX()+opica.getWidth()-budova2.getWidth()<=budova2x && opica.getY()-opica.getHeight()>budova2y-budova2.getHeight())){
+                            else if ((opica.getX()+opica.getWidth()>=budova2x-5 && opica.getX()+opica.getWidth()-budova2.getWidth()<=budova2x && opica.getY()-opica.getHeight()>budova2y-budova2.getHeight())){
                                 rychlost=0;
                             }else if (dashcount<=0){
                                 rychlost=2;
@@ -183,10 +182,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         if (bezim) {
                             opica.setImageResource(R.drawable.jumping_monkey);
-                            if ((opica.getX() + opica.getWidth() >= budovaX && opica.getX() <= budovaX + budova.getWidth() && opica.getY() - opica.getHeight() == budova.getY() - budova.getHeight()) || (opica.getX() + opica.getWidth() >= budova2x && opica.getX() <= budova2x + budova.getWidth() && opica.getY() - opica.getHeight() == budova2.getY() - budova2.getHeight())) {
+                            if ((opica.getX() + opica.getWidth() >= budovaX && opica.getX() <= budovaX + budova.getWidth() && opica.getY() - opica.getHeight() >= budova.getY() - budova.getHeight()) || (opica.getX() + opica.getWidth() >= budova2x && opica.getX() <= budova2x + budova2.getWidth() && opica.getY() - opica.getHeight() >= budova2.getY() - budova2.getHeight())) {
                                 bezim = false;
                                 idemhore = true;
-                                dash=false;
                                 timerO = new Timer();
                                 timerO.schedule(new TimerTask() {
                                     @Override
