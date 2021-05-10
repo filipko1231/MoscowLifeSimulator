@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                             posunAuto2();
                             dashcount--;
 
-                            if (!bezim && ((opica.getX() + opica.getWidth() >= budovaX && opica.getX() <= budovaX + budova.getWidth() && opica.getY() - opica.getHeight() >= budova.getY() - budova.getHeight()) || (opica.getX() + opica.getWidth() >= budova2x && opica.getX() <= budova2x + budova2.getWidth() && opica.getY() - opica.getHeight() >= budova2.getY() - budova2.getHeight()))) {
+                            if (!idemhore && !bezim && ((opica.getX() + opica.getWidth() >= budovaX && opica.getX() <= budovaX + budova.getWidth() && opica.getY() - opica.getHeight() >= budova.getY() - budova.getHeight()) || (opica.getX() + opica.getWidth() >= budova2x && opica.getX() <= budova2x + budova2.getWidth() && opica.getY() - opica.getHeight() >= budova2.getY() - budova2.getHeight()))) {
                                 bezim=true;
                                 dash=false;
                                 opica.setImageResource(R.drawable.running_monkey);
@@ -193,7 +193,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (bezim) {
-                            opica.setImageResource(R.drawable.jumping_monkey);
+
+
                             if ((opica.getX() + opica.getWidth() >= budovaX && opica.getX() <= budovaX + budova.getWidth() && opica.getY() - opica.getHeight() >= budova.getY() - budova.getHeight()) || (opica.getX() + opica.getWidth() >= budova2x && opica.getX() <= budova2x + budova2.getWidth() && opica.getY() - opica.getHeight() >= budova2.getY() - budova2.getHeight())) {
                                 bezim = false;
                                 idemhore = true;
@@ -213,6 +214,7 @@ public class MainActivity extends AppCompatActivity {
                                     }
 
                                 }, 0, 7);
+                                opica.setImageResource(R.drawable.jumping_monkey);
                             }
                         }
                         else if(!dash) {
