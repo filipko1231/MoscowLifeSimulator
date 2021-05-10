@@ -9,6 +9,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         private DisplayMetrics displayMetrics;
         private MediaPlayer mediaPlayer;
 
+        private ImageView pozadie3;
         private FrameLayout pozadie;
         private ImageView opica;
         private ImageView budova,budova2;
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
             getSupportActionBar().hide();
             pozadie = findViewById(R.id.pozadie);
+            pozadie3 = findViewById(R.id.pozadie3);
             opica = findViewById(R.id.opica);
             budova = findViewById(R.id.auto);
             budova2 = findViewById(R.id.auto2);
@@ -79,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
             hScore = settings.getInt("HIGH_SCORE", 0);
             HscoreView.setText("High score : "+hScore);
             ScoreView.setText("0 : Score");
+
             novaHra();
         }
         public void novaHra(){
