@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             posunAuto();
                             posunAuto2();
+                            dashcount--;
 
                             if (!bezim &&  (opica.getX()+opica.getWidth()>=budovaX && opica.getX()<=budovaX+budova.getWidth() && opica.getY()-opica.getHeight()==budova.getY()-budova.getHeight()) && !(opica.getX()+opica.getWidth()>=budova2x && opica.getX()<=budova2x+budova.getWidth() && opica.getY()-opica.getHeight()==budova2.getY()-budova2.getHeight())){
                                 opica.setImageResource(R.drawable.running_monkey);
@@ -152,13 +153,10 @@ public class MainActivity extends AppCompatActivity {
                             }
                             else if ((opica.getX()+opica.getWidth()>=budova2x && opica.getX()+opica.getWidth()-budova2.getWidth()<=budova2x && opica.getY()-opica.getHeight()>budova2y-budova2.getHeight())){
                                 rychlost=0;
-                            }
-                            else if (dash){
+                            }else if (dashcount<=0){
+                                rychlost=2;
+                            }else if (dash){
                                 rychlost=10;
-                                dashcount--;
-                                if (dashcount<=0){
-                                    rychlost=2;
-                                }
                             }
 
 
