@@ -136,10 +136,10 @@ public class MainActivity extends AppCompatActivity {
                             posunAuto2();
                             dashcount--;
 
-                            if ((opica.getX() + opica.getWidth() >= budovaX && opica.getX() <= budovaX + budova.getWidth() && opica.getY() - opica.getHeight() >= budova.getY() - budova.getHeight()) || (opica.getX() + opica.getWidth() >= budova2x && opica.getX() <= budova2x + budova2.getWidth() && opica.getY() - opica.getHeight() >= budova2.getY() - budova2.getHeight())) {
-                                opica.setImageResource(R.drawable.running_monkey);
+                            if (!bezim && ((opica.getX() + opica.getWidth() >= budovaX && opica.getX() <= budovaX + budova.getWidth() && opica.getY() - opica.getHeight() >= budova.getY() - budova.getHeight()) || (opica.getX() + opica.getWidth() >= budova2x && opica.getX() <= budova2x + budova2.getWidth() && opica.getY() - opica.getHeight() >= budova2.getY() - budova2.getHeight()))) {
                                 bezim=true;
                                 dash=false;
+                                opica.setImageResource(R.drawable.running_monkey);
                             }
                             else if (!idemhore &&  !(opica.getX()+opica.getWidth()>=budovaX && opica.getX()<=budovaX+budova.getWidth() && opica.getY()-opica.getHeight()==budova.getY()-budova.getHeight()) && !(opica.getX()+opica.getWidth()>=budova2x && opica.getX()<=budova2x+budova.getWidth() && opica.getY()-opica.getHeight()==budova2.getY()-budova2.getHeight())) {
                                 spadni();
@@ -147,15 +147,23 @@ public class MainActivity extends AppCompatActivity {
                             }
 
 
-                            if ((opica.getX()+opica.getWidth()>=budovaX-5 && opica.getX()+opica.getWidth()-budova.getWidth()<=budovaX && opica.getY()-opica.getHeight()>budovaY-budova.getHeight())) {
+                            if ((opica.getX()+opica.getWidth()>=budovaX-3 && opica.getX()+opica.getWidth()-budova.getWidth()<=budovaX && opica.getY()-opica.getHeight()>budovaY-budova.getHeight())) {
                                 rychlost=0;
                             }
-                            else if ((opica.getX()+opica.getWidth()>=budova2x-5 && opica.getX()+opica.getWidth()-budova2.getWidth()<=budova2x && opica.getY()-opica.getHeight()>budova2y-budova2.getHeight())){
+                            else if ((opica.getX()+opica.getWidth()>=budova2x-3 && opica.getX()+opica.getWidth()-budova2.getWidth()<=budova2x && opica.getY()-opica.getHeight()>budova2y-budova2.getHeight())){
                                 rychlost=0;
                             }else if (dashcount<=0){
                                 rychlost=2;
                             }else if (dash){
-                                rychlost=10;
+
+                                if ((opica.getX()+opica.getWidth()>=budovaX-11 && opica.getX()+opica.getWidth()-budova.getWidth()<=budovaX && opica.getY()-opica.getHeight()>budovaY-budova.getHeight())) {
+                                    rychlost=0;
+                                }
+                                else if ((opica.getX()+opica.getWidth()>=budova2x-11 && opica.getX()+opica.getWidth()-budova2.getWidth()<=budova2x && opica.getY()-opica.getHeight()>budova2y-budova2.getHeight())){
+                                    rychlost=0;
+                                }else{
+                                    rychlost=10;
+                                }
                             }
 
 
@@ -263,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
         public boolean koniec(){
-            if (opica.getY()>displayMetrics.heightPixels ){
+            if (opica.getY()-opica.getHeight()>displayMetrics.heightPixels ){
                 return true;
             }
             return false;
