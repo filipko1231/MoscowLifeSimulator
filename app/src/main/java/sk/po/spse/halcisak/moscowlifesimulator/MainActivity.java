@@ -109,10 +109,11 @@ public class MainActivity extends AppCompatActivity {
         budova.setX(budovaX);
         budovaY =(int)((displayMetrics.heightPixels/2)+(displayMetrics.heightPixels/8));
         budova.setY(budovaY);
-        budova2x=budovaX+1500;
+        budova2x=budovaX+1700;
         budova2y=budovaY+200;
         budova2.setY(budova2y);
         budova2.setX(budova2x);
+        dash=true;
 
     }
     public void start(View view){
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         ScoreView.setText(score+" : Score");
         rychlost=2;
         bezim=false;
-        dash=false;
+        dash=true;
         opicaY = -500;
         opica.setY(opicaY);
         opica.setImageResource(R.drawable.running_monkey);
@@ -213,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 }
 
-                            }, 0, 7);
+                            }, 0, 10);
                             opica.setImageResource(R.drawable.jumping_monkey);
                         }
                     }
