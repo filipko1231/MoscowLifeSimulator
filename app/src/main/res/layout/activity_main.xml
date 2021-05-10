@@ -11,14 +11,7 @@
         android:id="@+id/pozadie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/tr">
-
-        <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/pozadie3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/druhe_pozadie"
-            android:scaleType="fitXY"/>
+        android:background="@drawable/pozadie">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,7 +67,6 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
-
         <pl.droidsonroids.gif.GifImageView
             android:id="@+id/opica"
             android:layout_width="wrap_content"
@@ -82,6 +74,8 @@
             android:layout_marginLeft="45dp"
             android:src="@drawable/running_monkey"
             />
+
+
 
 
         <ImageView
@@ -96,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            app:srcCompat="@drawable/budova3" />
+            app:srcCompat="@drawable/budova1" />
 
     </FrameLayout>
 </LinearLayout>
