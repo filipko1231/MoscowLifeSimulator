@@ -134,15 +134,15 @@ public class MainActivity extends AppCompatActivity {
         budova.setX(budovaX);
         budovaY =(int)((displayMetrics.heightPixels/2)+(displayMetrics.heightPixels/8));
         budova.setY(budovaY);
-        budova2x=budovaX+1700;
+        budova2x=budovaX+900;
         budova2y=budovaY+200;
         budova2.setY(budova2y);
         budova2.setX(budova2x);
-        budova3x=budovaX+2400;
+        budova3x=budovaX+1700;
         budova3y=budovaY+100;
         budova3.setY(budova3y);
         budova3.setX(budova3x);
-        budova4x=budovaX+900;
+        budova4x=budovaX+2500;
         budova4y=budovaY+150;
         budova4.setY(budova4y);
         budova4.setX(budova4x);
@@ -282,6 +282,8 @@ public class MainActivity extends AppCompatActivity {
         if (budovaX < -budova.getWidth()*2){
             budovaX =displayMetrics.widthPixels;
             budova.setX(budovaX);
+            budovaY = rn.nextInt((displayMetrics.heightPixels-50)-(displayMetrics.heightPixels-budova.getHeight()))+displayMetrics.heightPixels-budova.getHeight();
+            budova.setY(budovaY);
             score++;
             ScoreView.setText(score+" : Score");
 
@@ -293,8 +295,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void posunAuto2(){
         if (budova2x < -budova2.getWidth()*2){
-            budova2x =displayMetrics.widthPixels;
+            budova2x =budovaX+rn.nextInt(700)+budova.getWidth()+50;
             budova2.setX(budova2x);
+            budova2y = rn.nextInt((displayMetrics.heightPixels-50)-(displayMetrics.heightPixels-budova.getHeight()))+displayMetrics.heightPixels-budova.getHeight();
+            budova2.setY(budova2y);
             score++;
             ScoreView.setText(score+" : Score");
         }
@@ -305,8 +309,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void posunAuto3(){
         if (budova3x < -budova3.getWidth()*2){
-            budova3x =displayMetrics.widthPixels;
+            budova3x =budova2x+rn.nextInt(700)+budova.getWidth()+50;
             budova3.setX(budova3x);
+            budova3y = rn.nextInt((displayMetrics.heightPixels-50)-(displayMetrics.heightPixels-budova.getHeight()))+displayMetrics.heightPixels-budova.getHeight();
+            budova3.setY(budova3y);
             score++;
             ScoreView.setText(score+" : Score");
         }
@@ -317,8 +323,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void posunAuto4(){
         if (budova4x < -budova4.getWidth()*2){
-            budova4x =displayMetrics.widthPixels;
+            budova4x =budova3x+rn.nextInt(700)+budova.getWidth()+50;
             budova4.setX(budova4x);
+            budova4y = rn.nextInt((displayMetrics.heightPixels-50)-(displayMetrics.heightPixels-budova.getHeight()))+displayMetrics.heightPixels-budova.getHeight();
+            budova4.setY(budova4y);
             score++;
             ScoreView.setText(score+" : Score");
         }
