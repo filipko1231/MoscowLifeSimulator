@@ -99,11 +99,17 @@
             app:srcCompat="@drawable/budova12" />
         <ImageView
 
-            android:id="@+id/auto3"
+        android:id="@+id/auto3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        app:srcCompat="@drawable/budova12" />
+        <ImageView
+
+            android:id="@+id/auto4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             app:srcCompat="@drawable/budova12" />
-
     </FrameLayout>
 </LinearLayout>

@@ -39,14 +39,14 @@ public class MainActivity extends AppCompatActivity {
     private ImageView pozadie3;
     private FrameLayout pozadie;
     private ImageView opica;
-    private ImageView budova,budova2,budova3;
+    private ImageView budova,budova2,budova3,budova4;
     private TextView HscoreView;
     private TextView ScoreView;
     private TextView play;
     private float rychlost = 2;
     private int dashcount=0;
 
-    private float budovaX, budovaY, opicaY, budova2x, budova2y,budova3x, budova3y;
+    private float budovaX, budovaY, opicaY, budova2x, budova2y,budova3x, budova3y,budova4x, budova4y;
     private boolean start=true;
     private boolean idemhore;
     private boolean bezim;
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         budova = findViewById(R.id.auto);
         budova2 = findViewById(R.id.auto2);
         budova3 = findViewById(R.id.auto3);
+        budova4 = findViewById(R.id.auto4);
         HscoreView = findViewById(R.id.highScoreView);
         ScoreView = findViewById(R.id.scoreView);
         play = findViewById(R.id.play);
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         budova.setVisibility(View.GONE);
         budova2.setVisibility(View.GONE);
         budova3.setVisibility(View.GONE);
+        budova4.setVisibility(View.GONE);
         HscoreView.setText("High score : "+hScore);
 
 
@@ -140,6 +142,10 @@ public class MainActivity extends AppCompatActivity {
         budova3y=budovaY+100;
         budova3.setY(budova3y);
         budova3.setX(budova3x);
+        budova4x=budovaX+900;
+        budova4y=budovaY+150;
+        budova4.setY(budova4y);
+        budova4.setX(budova4x);
         dash=true;
 
         score = 0;
@@ -155,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
         budova.setVisibility(View.VISIBLE);
         budova2.setVisibility(View.VISIBLE);
         budova3.setVisibility(View.VISIBLE);
+        budova4.setVisibility(View.VISIBLE);
         prehra=false;
         timerB = new Timer();
         timerB.schedule(new TimerTask() {
@@ -166,16 +173,17 @@ public class MainActivity extends AppCompatActivity {
                         posunAuto();
                         posunAuto2();
                         posunAuto3();
+                        posunAuto4();
                         dashcount--;
 
-                        if (!idemhore && !bezim && ((opica.getX() + opica.getWidth() >= budovaX && opica.getX() <= budovaX + budova.getWidth() && opica.getY() - opica.getHeight() >= budova.getY() - budova.getHeight()) || (opica.getX() + opica.getWidth() >= budova2x && opica.getX() <= budova2x + budova2.getWidth() && opica.getY() - opica.getHeight() >= budova2.getY() - budova2.getHeight()) || (opica.getX() + opica.getWidth() >= budova3x && opica.getX() <= budova3x + budova3.getWidth() && opica.getY() - opica.getHeight() >= budova3.getY() - budova3.getHeight())))
+                        if (!idemhore && !bezim && ((opica.getX() + opica.getWidth() >= budovaX && opica.getX() <= budovaX + budova.getWidth() && opica.getY() - opica.getHeight() >= budova.getY() - budova.getHeight()) || (opica.getX() + opica.getWidth() >= budova2x && opica.getX() <= budova2x + budova2.getWidth() && opica.getY() - opica.getHeight() >= budova2.getY() - budova2.getHeight()) || (opica.getX() + opica.getWidth() >= budova3x && opica.getX() <= budova3x + budova3.getWidth() && opica.getY() - opica.getHeight() >= budova3.getY() - budova3.getHeight()) || (opica.getX() + opica.getWidth() >= budova4x && opica.getX() <= budova4x + budova4.getWidth() && opica.getY() - opica.getHeight() >= budova4.getY() - budova4.getHeight())))
                         {
                             bezim=true;
                             rychlost=2;
                             dash=false;
                             opica.setImageResource(R.drawable.running_monkey);
                         }
-                        else if (!idemhore &&  !(opica.getX()+opica.getWidth()>=budovaX && opica.getX()<=budovaX+budova.getWidth() && opica.getY()-opica.getHeight()==budova.getY()-budova.getHeight()) && !(opica.getX()+opica.getWidth()>=budova2x && opica.getX()<=budova2x+budova.getWidth() && opica.getY()-opica.getHeight()==budova2.getY()-budova2.getHeight())&& !(opica.getX()+opica.getWidth()>=budova3x && opica.getX()<=budova3x+budova.getWidth() && opica.getY()-opica.getHeight()==budova3.getY()-budova3.getHeight())) {
+                        else if (!idemhore &&  !(opica.getX()+opica.getWidth()>=budovaX && opica.getX()<=budovaX+budova.getWidth() && opica.getY()-opica.getHeight()==budova.getY()-budova.getHeight()) && !(opica.getX()+opica.getWidth()>=budova2x && opica.getX()<=budova2x+budova.getWidth() && opica.getY()-opica.getHeight()==budova2.getY()-budova2.getHeight())&& !(opica.getX()+opica.getWidth()>=budova3x && opica.getX()<=budova3x+budova.getWidth() && opica.getY()-opica.getHeight()==budova3.getY()-budova3.getHeight())&& !(opica.getX()+opica.getWidth()>=budova4x && opica.getX()<=budova4x+budova.getWidth() && opica.getY()-opica.getHeight()==budova4.getY()-budova4.getHeight())) {
                             spadni();
                             bezim=false;
                         }
@@ -188,6 +196,9 @@ public class MainActivity extends AppCompatActivity {
                         }
                         else if ((opica.getX()+opica.getWidth()>=budova3x-3 && opica.getX()+opica.getWidth()-budova3.getWidth()<=budova3x && opica.getY()-opica.getHeight()>budova3y-budova3.getHeight())){
                             rychlost=0;
+                        }
+                        else if ((opica.getX()+opica.getWidth()>=budova4x-3 && opica.getX()+opica.getWidth()-budova4.getWidth()<=budova4x && opica.getY()-opica.getHeight()>budova4y-budova4.getHeight())){
+                            rychlost=0;
                         }else if (dashcount<=0){
                             rychlost=2;
                         }else if (dash){
@@ -199,6 +210,9 @@ public class MainActivity extends AppCompatActivity {
                                 rychlost=0;
                             }
                             else if ((opica.getX()+opica.getWidth()>=budova3x-11 && opica.getX()+opica.getWidth()-budova3.getWidth()<=budova3x && opica.getY()-opica.getHeight()>budova3y-budova3.getHeight())){
+                                rychlost=0;
+                            }
+                            else if ((opica.getX()+opica.getWidth()>=budova4x-11 && opica.getX()+opica.getWidth()-budova4.getWidth()<=budova4x && opica.getY()-opica.getHeight()>budova4y-budova4.getHeight())){
                                 rychlost=0;
                             }
                             else{
@@ -228,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if (bezim) {
-                        if ((opica.getX() + opica.getWidth() >= budovaX && opica.getX() <= budovaX + budova.getWidth() && opica.getY() - opica.getHeight() >= budova.getY() - budova.getHeight()) || (opica.getX() + opica.getWidth() >= budova2x && opica.getX() <= budova2x + budova2.getWidth() && opica.getY() - opica.getHeight() >= budova2.getY() - budova2.getHeight()) || (opica.getX() + opica.getWidth() >= budova3x && opica.getX() <= budova3x + budova3.getWidth() && opica.getY() - opica.getHeight() >= budova3.getY() - budova3.getHeight())) {
+                        if ((opica.getX() + opica.getWidth() >= budovaX && opica.getX() <= budovaX + budova.getWidth() && opica.getY() - opica.getHeight() >= budova.getY() - budova.getHeight()) || (opica.getX() + opica.getWidth() >= budova2x && opica.getX() <= budova2x + budova2.getWidth() && opica.getY() - opica.getHeight() >= budova2.getY() - budova2.getHeight()) || (opica.getX() + opica.getWidth() >= budova3x && opica.getX() <= budova3x + budova3.getWidth() && opica.getY() - opica.getHeight() >= budova3.getY() - budova3.getHeight()) || (opica.getX() + opica.getWidth() >= budova4x && opica.getX() <= budova4x + budova4.getWidth() && opica.getY() - opica.getHeight() >= budova4.getY() - budova4.getHeight())) {
                             bezim = false;
                             idemhore = true;
                             timerO = new Timer();
@@ -299,6 +313,18 @@ public class MainActivity extends AppCompatActivity {
 
         budova3x -= rychlost;
         budova3.setX(budova3x);
+
+    }
+    public void posunAuto4(){
+        if (budova4x < -budova4.getWidth()*2){
+            budova4x =displayMetrics.widthPixels;
+            budova4.setX(budova4x);
+            score++;
+            ScoreView.setText(score+" : Score");
+        }
+
+        budova4x -= rychlost;
+        budova4.setX(budova4x);
 
     }
     //450
