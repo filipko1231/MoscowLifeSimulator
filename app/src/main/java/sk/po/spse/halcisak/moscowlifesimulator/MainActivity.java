@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean start=true;
     private boolean idemhore;
     private boolean bezim;
-
+    private boolean firstStart=false;
 
     private boolean dash;
 
@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         pozadie = findViewById(R.id.pozadie);
+
 
         opica = findViewById(R.id.opica);
         budova = findViewById(R.id.auto);
@@ -105,6 +106,26 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        //budovaX = opica.getX()+2100;
+        //budova.setX(budovaX);
+        //budovaY =(int)((displayMetrics.heightPixels/2)+(displayMetrics.heightPixels/8));
+        //budova.setY(budovaY);
+        if (firstStart){
+            opica.setY((displayMetrics.heightPixels/2)+(displayMetrics.heightPixels/8));
+            opica.setImageResource(R.drawable.idle_monkey_ver2);
+            budova2x=opica.getX();
+            budova2y=opica.getY()+opica.getWidth();
+            budova2.setY(budova2y);
+            budova2.setX(budova2x);
+            opica.setVisibility(View.VISIBLE);
+            budova2.setVisibility(View.VISIBLE);
+        }
+
+        firstStart=true;
+        //dash=true;
+
+    }
+    public void start(View view){
         budovaX = opica.getX()+2100;
         budova.setX(budovaX);
         budovaY =(int)((displayMetrics.heightPixels/2)+(displayMetrics.heightPixels/8));
@@ -115,8 +136,6 @@ public class MainActivity extends AppCompatActivity {
         budova2.setX(budova2x);
         dash=true;
 
-    }
-    public void start(View view){
         score = 0;
         ScoreView.setText(score+" : Score");
         rychlost=2;
@@ -143,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
 
                         if (!idemhore && !bezim && ((opica.getX() + opica.getWidth() >= budovaX && opica.getX() <= budovaX + budova.getWidth() && opica.getY() - opica.getHeight() >= budova.getY() - budova.getHeight()) || (opica.getX() + opica.getWidth() >= budova2x && opica.getX() <= budova2x + budova2.getWidth() && opica.getY() - opica.getHeight() >= budova2.getY() - budova2.getHeight()))) {
                             bezim=true;
+                            rychlost=2;
                             dash=false;
                             opica.setImageResource(R.drawable.running_monkey);
                         }
@@ -150,7 +170,6 @@ public class MainActivity extends AppCompatActivity {
                             spadni();
                             bezim=false;
                         }
-
 
                         if ((opica.getX()+opica.getWidth()>=budovaX-3 && opica.getX()+opica.getWidth()-budova.getWidth()<=budovaX && opica.getY()-opica.getHeight()>budovaY-budova.getHeight())) {
                             rychlost=0;
@@ -194,8 +213,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if (bezim) {
-
-
                         if ((opica.getX() + opica.getWidth() >= budovaX && opica.getX() <= budovaX + budova.getWidth() && opica.getY() - opica.getHeight() >= budova.getY() - budova.getHeight()) || (opica.getX() + opica.getWidth() >= budova2x && opica.getX() <= budova2x + budova2.getWidth() && opica.getY() - opica.getHeight() >= budova2.getY() - budova2.getHeight())) {
                             bezim = false;
                             idemhore = true;
