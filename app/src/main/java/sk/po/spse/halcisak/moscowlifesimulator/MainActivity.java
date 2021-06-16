@@ -252,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onClick(View v) {
-                    if (bezim) {
+                    if (!hraJeZastavena && bezim) {
                         if ((opica.getX() + opica.getWidth() >= budovaX && opica.getX()-opica.getWidth() <= budovaX + budova.getWidth() && opica.getY() - opica.getHeight() >= budova.getY() - budova.getHeight()) || (opica.getX() + opica.getWidth() >= budova2x && opica.getX()-opica.getWidth() <= budova2x + budova2.getWidth() && opica.getY() - opica.getHeight() >= budova2.getY() - budova2.getHeight()) || (opica.getX() + opica.getWidth() >= budova3x && opica.getX()-opica.getWidth() <= budova3x + budova3.getWidth() && opica.getY() - opica.getHeight() >= budova3.getY() - budova3.getHeight()) || (opica.getX() + opica.getWidth() >= budova4x && opica.getX()-opica.getWidth() <= budova4x + budova4.getWidth() && opica.getY() - opica.getHeight() >= budova4.getY() - budova4.getHeight())) {
                             bezim = false;
                             idemhore = true;
@@ -275,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
                             opica.setImageResource(R.drawable.jumping_monkey);
                         }
                     }
-                    else if(!dash) {
+                    else if(!hraJeZastavena && !dash) {
                         dash=true;
                         dashcount=100;
 
@@ -290,9 +290,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pausa(View view){
-
-        System.out.println("klik");
-        System.out.println(temprychlost);
 
         if (hraJeZastavena){
             aktualnarychlost =temprychlost;
