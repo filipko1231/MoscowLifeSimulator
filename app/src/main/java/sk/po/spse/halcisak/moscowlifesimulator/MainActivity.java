@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private double rychlost = 1.5;
     private double aktualnarychlost = 1.5;
 
-    private int dashcount=0;
+    private int dashcount=0,generationcoun=0;
 
     private float budovaX, budovaY, opicaY, budova2x, budova2y,budova3x, budova3y,budova4x, budova4y;
     private boolean start=true;
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         }
         rychlost = 1.5;
         aktualnarychlost = 1.5;
-
+        generationcoun=0;
         displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
@@ -293,18 +293,23 @@ public class MainActivity extends AppCompatActivity {
             if (budova4x+opica.getWidth()<=budovaX && budova4x+budova.getWidth()>=budovaX)
             {
                 budovaX=budova4x+budova.getWidth();
-                budovaY=budova4y;
-            }
-            if (budova3x+opica.getWidth()<=budovaX && budova3x+budova.getWidth()>=budovaX)
+
+                generationcoun++;
+                //budova.setImageResource(R.drawable.budova12);
+                if (generationcoun>=3)
+                {
+                    budovaX=budovaX+budova.getWidth();
+                    generationcoun=0;
+                }else
+                {
+                    budovaY=budova4y;
+                }
+            }else
             {
-                budovaX=budova3x+budova.getWidth();
-                budovaY=budova3y;
+                generationcoun=0;
+                //budova.setImageResource(R.drawable.budova1);
             }
-            if (budova2x+opica.getWidth()<=budovaX && budova2x+budova.getWidth()>=budovaX)
-            {
-                budovaX=budova2x+budova.getWidth();
-                budovaY=budova2y;
-            }
+
             budova.setY(budovaY);
             budova.setX(budovaX);
 
@@ -323,10 +328,21 @@ public class MainActivity extends AppCompatActivity {
             if (budova2x-budovaX<budova.getWidth())
             {
                 budova2x=budovaX+budova.getWidth();
-                budova2y=budovaY;
+
+                //budova2.setImageResource(R.drawable.budova1);
+                generationcoun++;
+                if (generationcoun>=3)
+                {
+                    budova2x=budova2x+budova.getWidth();
+                    generationcoun=0;
+                }else {
+                    budova2y=budovaY;
+                }
             }else
             {
                 budova2x+=opica.getWidth();
+                generationcoun=0;
+                //budova2.setImageResource(R.drawable.budova12);
             }
 
             budova2.setY(budova2y);
@@ -346,10 +362,22 @@ public class MainActivity extends AppCompatActivity {
             if (budova3x-budova2x<budova.getWidth())
             {
                 budova3x=budova2x+budova.getWidth();
-                budova3y=budova2y;
+
+                generationcoun++;
+                //budova3.setImageResource(R.drawable.budova12);
+                if (generationcoun>=3)
+                {
+                    budova3x=budova3x+budova.getWidth();
+                    generationcoun=0;
+                }else
+                {
+                    budova3y=budova2y;
+                }
             }else
             {
                 budova3x+=opica.getWidth();
+                //budova3.setImageResource(R.drawable.budova13);
+                generationcoun=0;
             }
 
             budova3.setX(budova3x);
@@ -369,10 +397,22 @@ public class MainActivity extends AppCompatActivity {
             if (budova4x-budova3x<budova.getWidth())
             {
                 budova4x=budova3x+budova.getWidth();
-                budova4y=budova3y;
+
+                //budova4.setImageResource(R.drawable.budova13);
+                generationcoun++;
+                if (generationcoun>=3)
+                {
+                 budova4x=budova4x+budova.getWidth();
+                 generationcoun=0;
+                }else
+                {
+                    budova4y=budova3y;
+                }
             }else
             {
                 budova4x+=opica.getWidth();
+                generationcoun=0;
+                //budova4.setImageResource(R.drawable.budova12);
             }
             budova4.setX(budova4x);
             budova4.setY(budova4y);
