@@ -5,9 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
@@ -69,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -229,6 +238,9 @@ public class MainActivity extends AppCompatActivity {
                             else{
                                 rychlost=10;
                             }
+                        }
+                        if(dash){
+
                         }
 
 
@@ -438,8 +450,8 @@ public class MainActivity extends AppCompatActivity {
                 generationcoun++;
                 if (generationcoun>=3)
                 {
-                 budova4x=budova4x+budova.getWidth();
-                 generationcoun=0;
+                    budova4x=budova4x+budova.getWidth();
+                    generationcoun=0;
                 }else
                 {
                     budova4y=budova3y;
@@ -460,6 +472,7 @@ public class MainActivity extends AppCompatActivity {
         budova4.setX(budova4x);
 
     }
+
     //450
     public void vyskoc(){
         if (idemhore){
@@ -501,4 +514,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+
+
 }
