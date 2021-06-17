@@ -5,6 +5,8 @@
     android:id="@+id/pozadie2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:onClick="pausa"
     tools:context=".MainActivity">
 
     <FrameLayout
@@ -17,8 +19,8 @@
             android:id="@+id/pozadie3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/druhe_pozadie"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY"
+            android:src="@drawable/druhe_pozadie" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,6 +45,14 @@
                     android:textColor="#FFFDFD"
                     android:textSize="20sp" />
 
+                <ImageView
+                    android:id="@+id/pause"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="pausa"
+                    app:srcCompat="@drawable/pause_button" />
+
                 <TextView
                     android:id="@+id/scoreView"
                     android:layout_width="wrap_content"
@@ -64,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="150dp"
+                android:layout_marginTop="130dp"
                 android:clickable="true"
                 android:onClick="start"
                 android:text="play"
@@ -80,8 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="45dp"
-            android:src="@drawable/running_monkey"
-            />
+            android:src="@drawable/running_monkey" />
 
 
         <ImageView
@@ -90,6 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             app:srcCompat="@drawable/budova1" />
+
         <ImageView
 
             android:id="@+id/auto2"
@@ -97,13 +107,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             app:srcCompat="@drawable/budova12" />
+
         <ImageView
 
-        android:id="@+id/auto3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        app:srcCompat="@drawable/budova13" />
+            android:id="@+id/auto3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            app:srcCompat="@drawable/budova13" />
+
         <ImageView
 
             android:id="@+id/auto4"
